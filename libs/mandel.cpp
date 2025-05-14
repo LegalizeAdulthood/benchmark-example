@@ -14,7 +14,7 @@ static int iterate(std::complex<T> c)
     int iter{1};
     for (int i = 0; i < MAX_ITER; ++i)
     {
-        if (std::abs(z) > static_cast<T>(4))
+        if (std::abs(z) > static_cast<T>(2))
         {
             break;
         }
@@ -42,7 +42,7 @@ static int iterate(ComplexT<T> c)
     int iter{1};
     for (int i = 0; i < MAX_ITER; ++i)
     {
-        if (z.abs() > static_cast<T>(4))
+        if (z.abs() > static_cast<T>(2))
         {
             break;
         }
@@ -60,4 +60,39 @@ int iterate_complex(float real, float imag)
 int iterate_complex(double real, double imag)
 {
     return iterate(ComplexT<double>{real, imag});
+}
+
+template <typename T>
+static int iterate(T cr, T ci)
+{
+    T zr{cr};
+    T zi{ci};
+
+    int iter{1};
+    for (int i = 0; i < MAX_ITER; ++i)
+    {
+        if (std::abs(zr*zr + zi*zi) > static_cast<T>(4))
+        {
+            break;
+        }
+        // (a + bi)*(a + bi) = a(a + bi) + bi(a + bi)
+        //                   = a^2 + abi + abi + b^2i^2
+        //                   = a^2 - b^2 + 2abi
+        const T t{zr*zr - zi*zi};
+        zi *= static_cast<T>(2)*zr;
+        zi += ci;
+        zr = t + cr;
+        ++iter;
+    }
+    return iter;
+}
+
+int iterate_manual(float real, float imag)
+{
+    return iterate(real, imag);
+}
+
+int iterate_manual(double real, double imag)
+{
+    return iterate(real, imag);
 }

@@ -2,7 +2,7 @@
 
 #include <benchmark/benchmark.h>
 
-static void bench_std_float(benchmark::State &state)
+static void iterate_std_float(benchmark::State &state)
 {
     for (auto item : state)
     {
@@ -10,7 +10,7 @@ static void bench_std_float(benchmark::State &state)
     }
 }
 
-static void bench_std_double(benchmark::State &state)
+static void iterate_std_double(benchmark::State &state)
 {
     for (auto item : state)
     {
@@ -18,7 +18,7 @@ static void bench_std_double(benchmark::State &state)
     }
 }
 
-static void bench_complex_float(benchmark::State &state)
+static void iterate_complex_float(benchmark::State &state)
 {
     for (auto item: state)
     {
@@ -26,7 +26,7 @@ static void bench_complex_float(benchmark::State &state)
     }
 }
 
-static void bench_complex_double(benchmark::State &state)
+static void iterate_complex_double(benchmark::State &state)
 {
     for (auto item: state)
     {
@@ -34,9 +34,27 @@ static void bench_complex_double(benchmark::State &state)
     }
 }
 
-BENCHMARK(bench_std_float);
-BENCHMARK(bench_std_double);
-BENCHMARK(bench_complex_float);
-BENCHMARK(bench_complex_double);
+static void iterate_manual_float(benchmark::State &state)
+{
+    for (auto item: state)
+    {
+        const int iter = iterate_manual(-0.75f, 0.0f);
+    }
+}
+
+static void iterate_manual_double(benchmark::State &state)
+{
+    for (auto item: state)
+    {
+        const int iter = iterate_manual(-0.75, 0.0);
+    }
+}
+
+BENCHMARK(iterate_std_float);
+BENCHMARK(iterate_std_double);
+BENCHMARK(iterate_complex_float);
+BENCHMARK(iterate_complex_double);
+BENCHMARK(iterate_manual_float);
+BENCHMARK(iterate_manual_double);
 
 BENCHMARK_MAIN();
