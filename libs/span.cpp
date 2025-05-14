@@ -58,4 +58,34 @@ std::vector<int> span_complex(double start_re, double start_im, double end_re, d
     return span(ComplexT<double>{start_re, start_im}, ComplexT<double>{end_re, end_im}, num_pixels);
 }
 
+std::vector<int> span_manual(float start_re, float start_im, float end_re, float end_im, int num_pixels)
+{
+    std::vector<int> iters;
+    iters.reserve(num_pixels);
+    const float delta_re{(end_re - start_re) / static_cast<float>(num_pixels)};
+    const float delta_im{(end_im - start_im) / static_cast<float>(num_pixels)};
+    for (int i = 0; i < num_pixels; ++i)
+    {
+        iters.push_back(iterate_manual(start_re, start_im));
+        start_re += delta_re;
+        start_im += delta_im;
+    }
+    return iters;
+}
+
+std::vector<int> span_manual(double start_re, double start_im, double end_re, double end_im, int num_pixels)
+{
+    std::vector<int> iters;
+    iters.reserve(num_pixels);
+    const double delta_re{(end_re - start_re) / static_cast<double>(num_pixels)};
+    const double delta_im{(end_im - start_im) / static_cast<double>(num_pixels)};
+    for (int i = 0; i < num_pixels; ++i)
+    {
+        iters.push_back(iterate_manual(start_re, start_im));
+        start_re += delta_re;
+        start_im += delta_im;
+    }
+    return iters;
+}
+
 } // namespace mandel
