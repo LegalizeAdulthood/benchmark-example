@@ -1,4 +1,4 @@
-#include <lib/ComplexT.h>
+#include <mandel/ComplexT.h>
 
 #include <gtest/gtest.h>
 

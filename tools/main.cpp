@@ -1,4 +1,4 @@
-#include <lib/lib.h>
+#include <mandel/mandel.h>
 
 #include <benchmark/benchmark.h>
 
