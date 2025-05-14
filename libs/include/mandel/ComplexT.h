@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cmath>
+
 template <typename T>
 struct ComplexT
 {
@@ -27,5 +29,10 @@ struct ComplexT
     ComplexT operator*(ComplexT value) const
     {
         return {real * value.real - imag * value.imag, real * value.imag + imag * value.real};
+    }
+
+    T abs() const
+    {
+        return std::sqrt(real * real + imag * imag);
     }
 };

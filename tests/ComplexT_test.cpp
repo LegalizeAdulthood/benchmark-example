@@ -2,6 +2,7 @@
 
 #include <gtest/gtest.h>
 
+#include <cmath>
 #include <complex>
 
 TEST(TestComplexT, defaultConstruct)
@@ -82,4 +83,13 @@ TEST(TestComplexT, multiplyComplex)
 
     EXPECT_EQ(expected.real(), z.real);
     EXPECT_EQ(expected.imag(), z.imag);
+}
+
+TEST(TestComplexT, abs)
+{
+    const ComplexT<float> c{6.0f, 3.0f};
+
+    const float mag{c.abs()};
+
+    EXPECT_EQ(std::sqrt(c.real*c.real + c.imag*c.imag), mag);
 }
