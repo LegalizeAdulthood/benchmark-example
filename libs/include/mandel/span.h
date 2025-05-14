@@ -15,6 +15,5 @@ std::vector<int> span_highway_static_float(float start_re, float start_im, float
 std::vector<int> span_highway_dynamic_float(float start_re, float start_im, float end_re, float end_im, int num_pixels);
 
 const char *highway_static_target_name();
-const char *highway_dynamic_target_name();
 
 } // namespace mandel

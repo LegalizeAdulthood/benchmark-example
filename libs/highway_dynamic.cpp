@@ -17,17 +17,14 @@ namespace mandel
 namespace HWY_NAMESPACE
 {
 
-const char *highway_dynamic_target_name_impl()
-{
-    return hwy::TargetName(HWY_TARGET);
-}
-
 static std::vector<int> highway_dynamic_impl( float start_re, float start_im, float end_re, float end_im, int num_pixels )
 {
+    static constexpr int MAX_ITER{65536};
+
     std::vector<int> output;
     output.resize(num_pixels);
-    const float x_scale = (end_re - start_re) / static_cast<float>(num_pixels);
-    const float y_scale = (end_im - start_im) / static_cast<float>(num_pixels);
+    const float re_scale = (end_re - start_re) / static_cast<float>(num_pixels);
+    const float im_scale = (end_im - start_im) / static_cast<float>(num_pixels);
 
     const HWY_FULL(float) d;
     const HWY_FULL(int32_t) di;
@@ -36,17 +33,17 @@ static std::vector<int> highway_dynamic_impl( float start_re, float start_im, fl
     using VecMask = decltype(Zero(d) < Zero(d));
     const VecI one{Set(di, 1)};
 
-    const float cy = start_im + y_scale;
+    const float cy = start_im + im_scale;
     const VecZ cy_vec = Set(d, cy);
-    for (int x = 0; x < start_re; x += Lanes(d))
+    for (int x = 0; x < num_pixels; x += Lanes(d))
     {
         // Initialize SIMD vectors for the x coordinates
-        VecZ cx_vec = MulAdd(Iota(d, x), Set(d, x_scale), Set(d, start_re));
+        VecZ cx_vec = MulAdd(Iota(d, x), Set(d, re_scale), Set(d, start_re));
         VecZ zx_vec = cx_vec;
         VecZ zy_vec = cy_vec;
         VecI iter_vec = one;
 
-        for (int i = 0; i < end_re; ++i)
+        for (int i = 0; i < MAX_ITER; ++i)
         {
             const VecZ zx2 = zx_vec * zx_vec;
             const VecZ zy2 = zy_vec * zy_vec;
