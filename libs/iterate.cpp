@@ -4,7 +4,7 @@
 #include <cmath>
 #include <complex>
 
-constexpr int MAX_ITER{65536};
+static constexpr int MAX_ITER{65536};
 
 template <typename T>
 static int iterate(std::complex<T> c)
