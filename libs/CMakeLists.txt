@@ -1,7 +1,9 @@
 add_library(mandel
-    include/mandel/mandel.h
+    include/mandel/iterate.h
+    include/mandel/span.h
     include/mandel/ComplexT.h
-    mandel.cpp
+    iterate.cpp
+    span.cpp
 )
 target_include_directories(mandel PUBLIC include)
 target_folder(mandel "Libraries")
