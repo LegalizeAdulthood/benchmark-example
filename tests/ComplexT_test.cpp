@@ -91,5 +91,47 @@ TEST(TestComplexT, abs)
 
     const float mag{c.abs()};
 
-    EXPECT_EQ(std::sqrt(c.real*c.real + c.imag*c.imag), mag);
+    EXPECT_EQ(std::sqrt(c.real * c.real + c.imag * c.imag), mag);
+}
+
+TEST(TestComplexT, subtractReal)
+{
+    const ComplexT<float> c{6.0f, 3.0f};
+
+    ComplexT<float> z = c - 4.0f;
+
+    EXPECT_EQ(2.0f, z.real);
+    EXPECT_EQ(3.0f, z.imag);
+}
+
+TEST(TestComplexT, subtractComplex)
+{
+    const ComplexT<float> c{6.0f, 3.0f};
+    const ComplexT<float> c2{2.0f, 1.0f};
+
+    ComplexT<float> z = c - c2;
+
+    EXPECT_EQ(4.0f, z.real);
+    EXPECT_EQ(2.0f, z.imag);
+}
+
+TEST(TestComplexT, divideReal)
+{
+    const ComplexT<float> c{6.0f, 3.0f};
+
+    ComplexT<float> z = c / 2.0f;
+
+    EXPECT_EQ(3.0f, z.real);
+    EXPECT_EQ(1.5f, z.imag);
+}
+
+TEST(TestComplexT, addEqual)
+{
+    ComplexT<float> c{6.0f, 3.0f};
+    const ComplexT<float> c2{2.0f, 1.0f};
+
+    c += c2;
+
+    EXPECT_EQ(8.0f, c.real);
+    EXPECT_EQ(4.0f, c.imag);
 }

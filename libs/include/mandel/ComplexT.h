@@ -18,10 +18,28 @@ struct ComplexT
         return {real + value.real, imag + value.imag};
     }
 
+    ComplexT &operator+=(ComplexT value)
+    {
+        real += value.real;
+        imag += value.imag;
+        return *this;
+    }
+
+    ComplexT operator-(T value) const
+    {
+        return {real - value, imag};
+    }
+
+    ComplexT operator-(ComplexT value) const
+    {
+        return {real - value.real, imag - value.imag};
+    }
+
     ComplexT operator*(T value) const
     {
         return {real * value, imag * value};
     }
+
     // (a + bi) * (c + di) = a(c + di) + bi(c + di)
     //                     = ac + adi + bci + bdi^2
     //                     = ac + adi + bci - bd
@@ -34,5 +52,10 @@ struct ComplexT
     T abs() const
     {
         return std::sqrt(real * real + imag * imag);
+    }
+
+    ComplexT operator/(T value) const
+    {
+        return {real / value, imag / value};
     }
 };
