@@ -18,7 +18,25 @@ static void bench_std_double(benchmark::State &state)
     }
 }
 
+static void bench_complex_float(benchmark::State &state)
+{
+    for (auto item: state)
+    {
+        const int iter = iterate_complex(-0.75f, 0.0f);
+    }
+}
+
+static void bench_complex_double(benchmark::State &state)
+{
+    for (auto item: state)
+    {
+        const int iter = iterate_complex(-0.75, 0.0);
+    }
+}
+
 BENCHMARK(bench_std_float);
 BENCHMARK(bench_std_double);
+BENCHMARK(bench_complex_float);
+BENCHMARK(bench_complex_double);
 
 BENCHMARK_MAIN();
