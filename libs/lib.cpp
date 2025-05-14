@@ -5,15 +5,15 @@
 
 constexpr int MAX_ITER{65536};
 
-int iterate_std_complex(float real, float imag)
+template <typename T>
+static int iterate(std::complex<T> c)
 {
-    std::complex c(real, imag);
     std::complex z{c};
 
     int iter{1};
     for (int i = 0; i < MAX_ITER; ++i)
     {
-        if (std::abs(z) > 4.0f)
+        if (std::abs(z) > static_cast<T>(4))
         {
             break;
         }
@@ -21,4 +21,14 @@ int iterate_std_complex(float real, float imag)
         ++iter;
     }
     return iter;
+}
+
+int iterate_std_complex(float real, float imag)
+{
+    return iterate(std::complex{real, imag});
+}
+
+int iterate_std_complex(double real, double imag)
+{
+    return iterate(std::complex{real, imag});
 }
