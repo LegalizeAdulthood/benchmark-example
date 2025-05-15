@@ -2,7 +2,7 @@
 
 # Benchmark Example
 
-Sample code for the video Microbenchmarking with Google's Benchmark.
+Sample code for the video [Microbenchmarking with Google's Benchmark](https://www.youtube.com/watch?v=fFGE7GRdwdY).
 
 [Utah C++ Programmers](https://meetup.com/utah-cpp-programmers)\
 [Past Topics](https://utahcpp.wordpress.com/past-meeting-topics/)\
